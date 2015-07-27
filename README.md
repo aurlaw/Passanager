@@ -1,6 +1,6 @@
 # Passanager
 
-Dockerized Password Manager witten in Go with Redis and PostgreSQL
+Dockerized Password Manager written  in Go with Redis and PostgreSQL
 
 ## Prerequisites ##
 
