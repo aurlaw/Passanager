@@ -12,10 +12,16 @@ then
     apt-get install -qq ansible &> /dev/null || exit 1
     echo "Ansible installed"
 
-    echo "Installing Ansible Docker Plugin"
-	ansible-galaxy install angstwad.docker_ubuntu
-    echo "Ansible Docker installed"
 fi
+
+echo "Installing Ansible Docker Plugin"
+ansible-galaxy install angstwad.docker_ubuntu
+echo "Ansible Docker installed"
+
+echo "Installing Ansible Nodesoure Plugin"
+ansible-galaxy install nodesource.node
+echo "Ansible Nodesoure installed"
+
 
 cd /vagrant/provisioning
 ansible-playbook -c local setup.yml

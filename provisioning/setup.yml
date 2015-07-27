@@ -13,8 +13,8 @@
   roles:
     #- common
     #- nginx
-    - nodejs
+    - nodesource.node #ansible-galaxy install nodesource.node
     - ruby
     - golang
-    # - angstwad.docker_ubuntu #ansible-galaxy install angstwad.docker_ubuntu
-    # - docker
+    - angstwad.docker_ubuntu #ansible-galaxy install angstwad.docker_ubuntu
+    - docker
