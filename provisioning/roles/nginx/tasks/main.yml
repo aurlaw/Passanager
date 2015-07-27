@@ -1,0 +1,8 @@
+---
+- name: Install nginx
+  apt: pkg=nginx state=installed update_cache=true
+  notify: start nginx  
+
+- name: Copy nginx configurationvagrant
+  template: src=default.conf dest=/etc/nginx/sites-available/default
+  notify: restart nginx
