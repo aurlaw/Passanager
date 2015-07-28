@@ -11,10 +11,10 @@
       apt: update_cache=yes
 
   roles:
-    - common
+    # - common
     #- nginx
     - nodesource.node #ansible-galaxy install nodesource.node
     - ruby
     - golang
-    - angstwad.docker_ubuntu #ansible-galaxy install angstwad.docker_ubuntu
+    # - angstwad.docker_ubuntu #ansible-galaxy install angstwad.docker_ubuntu
     # - docker ## Note there is a bug in ansible docker, switch to use docker compose instead

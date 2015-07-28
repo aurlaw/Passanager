@@ -58,7 +58,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # configure Vagrant's ssh shell to be a non-login one
  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"  
   # shell provisioner for Ansbile. allows for running on windows hosts
-  config.vm.provision :shell,
-    :keep_color => true,
-    :inline => "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/provisioning && chmod +x init.sh && ./init.sh"  
+  config.vm.provision "ansible", type: "shell" do |s|
+    s.keep_color = true,
+    s.inline = "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/provisioning && chmod +x init.sh && ./init.sh" 
+  end
+
+  # config.vm.provision "docker", type: "docker"
+
+  # config.vm.provision "compose", type: "docker_compose" do |d|
+  #   d.yml = "/vagrant/provisioning/docker-compose.yml", 
+  #   d.rebuild = false, 
+  #   d.run =  "always"
+  # end  
+  # config.vm.provision "ansible", :shell,
+  #   :keep_color => true,
+  #   :inline => "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/provisioning && chmod +x init.sh && ./init.sh"  
+
+
+  config.vm.provision :docker
+  config.vm.provision :docker_compose, yml: "/vagrant/provisioning/docker-compose.yml", rebuild: false, run: "always"
+
 end
