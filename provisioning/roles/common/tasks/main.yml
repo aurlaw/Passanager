@@ -1,10 +1,16 @@
 ---
-- name: Common | Update apt cache
+- name: Common | Add Docker Group
+  group: name=docker state=present
   sudo: yes
-  apt: update-cache=yes
   tags: common
 
-- name: Common | Update language
+- name: Common | Add Vagrant user to Docker Group
+  user: name=vagrant shell=/bin/bash groups=vagrant,docker append=yes
   sudo: yes
-  apt: pkg=language-pack-en
   tags: common
+
+- name: Common | Create Docker volume dirs
+  file: path=/srv/docker state=directory
+  sudo: yes
+  tags: common
+

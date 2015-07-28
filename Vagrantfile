@@ -45,8 +45,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |v|
-    v.memory = 2048
-    v.cpus = 1
+    v.memory = 3072
+    v.cpus = 2
   end 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
@@ -60,5 +60,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # shell provisioner for Ansbile. allows for running on windows hosts
   config.vm.provision :shell,
     :keep_color => true,
-    :inline => "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/provisioning  && ./init.sh"  
+    :inline => "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/provisioning && chmod +x init.sh && ./init.sh"  
 end

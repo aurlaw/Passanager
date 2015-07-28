@@ -1,36 +1,7 @@
 ---
-- name: redis container
-  docker:
-    name: redis
-    image: redis
-    command: redis-server --appendonly yes
-    state: started
-    volumes:
-    - /srv/docker/redis:/data
-    # expose:
-    # - 6379
+- name: Start Docker containers
+  command: docker-compose -f ./roles/docker/docker-compose.yml up 
+  register: docker
+  sudo: yes
 
-- name: postgres container
-  docker:
-    name: postgresql
-    image: sameersbn/postgresql:9.4-2
-    state: started
-  	env:
-    - DB_USER=redmine
-    - DB_PASS=skwxhStJ
-    - DB_NAME=redmine_production
 
-  	volumes:
-    - /srv/docker/redmine/postgresql:/var/lib/postgresql
-    - /srv/docker/redmine/backup:/shareddb
-    - /vagrant/backup:/shared
-
-- name: postgres studio container
-  docker:
-    name: pgstudio
-    image: lukasmartinelli/pgstudio
-    state: started
-    links:
-    - "postgresql:postgresql"
-  	ports:
-    - "8181:8080"

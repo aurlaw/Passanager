@@ -25,3 +25,5 @@ echo "Ansible Nodesoure installed"
 
 cd /vagrant/provisioning
 ansible-playbook -c local setup.yml
+### Note there is a bug in ansible docker, switch to use docker compose instead
+docker-compose up
