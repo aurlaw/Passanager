@@ -3,7 +3,7 @@ redis:
   image: redis
   command: redis-server --appendonly yes
   ports:
-    - "6379"
+    - "6379:6379"
   volumes:
     - /srv/docker/redis:/data
 
@@ -11,7 +11,7 @@ postgresql:
   name: postgresql
   image: sameersbn/postgresql:9.4-2
   ports:
-    - "5432"
+    - "5432:5432"
   environment:
     - DB_USER=passanager
     - DB_PASS=skwxhStJ

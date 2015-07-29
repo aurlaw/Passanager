@@ -1,2 +1,2 @@
 #!/bin/bash 
-docker exec postgresql sudo bash '/shared/_internal_backup.sh'
+docker exec provisioning_postgresql_1 sudo bash '/shared/_internal_backup.sh'

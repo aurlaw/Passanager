@@ -55,7 +55,6 @@ Container volume root on guest: /srv/docker
 
 * Redis
 * PostgreSQL
-* PG Studio (http://192.168.20.100:8181)
 
 
 `https://github.com/nodesource/distributions#debinstall`
