@@ -38,7 +38,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 #  config.vm.synced_folder "provisioning", "/vprovisioning"
-  config.vm.synced_folder "app", "/vapp"
+  config.vm.synced_folder ".", "/vapp/src/github.com/aurlaw/passanager"
+  config.vm.synced_folder "provisioning", "/vprovisioning"
+  config.vm.synced_folder "backup", "/vbackup"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -60,7 +62,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # shell provisioner for Ansbile. allows for running on windows hosts
   config.vm.provision "ansible", type: "shell" do |s|
     s.keep_color = true,
-    s.inline = "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/provisioning && chmod +x init.sh && ./init.sh" 
+    s.inline = "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vprovisioning && chmod +x init.sh && ./init.sh" 
   end
 
   # config.vm.provision "docker", type: "docker"
@@ -76,6 +78,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
   config.vm.provision :docker
-  config.vm.provision :docker_compose, yml: "/vagrant/provisioning/docker-compose.yml", rebuild: false, run: "always"
+  config.vm.provision :docker_compose, yml: "/vprovisioning/docker-compose.yml", rebuild: false, run: "always"
 
 end

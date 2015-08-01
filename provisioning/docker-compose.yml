@@ -19,7 +19,7 @@ postgresql:
   volumes:
     - /srv/docker/postgresql:/var/lib/postgresql
     - /srv/docker/backup:/shareddb
-    - /vagrant/backup:/shared
+    - /vbackup:/shared
 
 # pgstudio:
 #   image: lukasmartinelli/pgstudio

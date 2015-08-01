@@ -45,6 +45,22 @@ $vagrant reload --provision
 ```
 
 ##TODO##
+
+Working Directory
+
+```
+$ vagrant ssh
+$ cd /vapp/src/github.com/aurlaw/passanager
+```
+
+First Time set up
+
+```
+$ go get github.com/tools/godep
+```
+
+Working Directory
+
 Go Application: port 9090
 
 
@@ -65,7 +81,7 @@ Container volume root on guest: /srv/docker
 Notes:
 Postgres Backup
 within vagrant ssh
-sudo /vagrant/backup/postgres_db_backup.sh
+sudo /vbackup/postgres_db_backup.sh
 
 Cron
 */5 * * * *  bash -x docker_db_backup.sh
