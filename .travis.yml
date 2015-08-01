@@ -4,9 +4,9 @@ go:
   - 1.4
 
 install:
-  - export PATH=$PATH:$HOME/gopath/bin
-  - go get github.com/tools/godep
-  - godep restore
-
+  # - export PATH=$PATH:$HOME/gopath/bin
+  # - go get github.com/tools/godep
+  # - godep restore
+    - go get -d ./...
 script:
   - make test
