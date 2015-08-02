@@ -1,6 +1,11 @@
 # Passanager
 
+![alt tag](https://raw.githubusercontent.com/aurlaw/Passanager/branch/temp/passanager_logo_v1.png)
+
 Dockerized Password Manager written  in Go with Redis and PostgreSQL
+
+[![Build Status](https://travis-ci.org/aurlaw/Passanager.svg?branch=master)](https://travis-ci.org/aurlaw/Passanager)
+
 
 ## Prerequisites ##
 
