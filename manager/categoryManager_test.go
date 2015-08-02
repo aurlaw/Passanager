@@ -1,34 +1,36 @@
 package manager
 
 import (
-	// "encoding/json" // "github.com/aurlaw/passanager/manager"
 	"fmt"
-	// "github.com/aurlaw/passanager/models"
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 	"strconv"
 	"testing"
 )
 
 var manager *CategoryManager
 
-const (
-	DB_HOST     = "192.168.20.100"
-	DB_USER     = "passanager"
-	DB_PASSWORD = "skwxhStJ"
-	DB_NAME     = "passanager"
-)
-
 func initTest() {
 
-	dbinfo := fmt.Sprintf("host=%s user=%s password=%s  dbname=%s sslmode=disable",
-		DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
+	configFile := "../config/config.json"
 
-	conf := &Configuration{DBConnStr: dbinfo}
-	manager = &CategoryManager{conf}
+	conf := LoadConfiguration(configFile)
+	// open the db once, no need to close it
+	db, err := sqlx.Connect("postgres", conf.DBConnectionString)
+	if err != nil {
+		panic(err)
+	}
+
+	manager = &CategoryManager{db}
 
 }
 
 func TestGetAllActive(t *testing.T) {
 	fmt.Println("TestGetAllActive")
+
+	if testing.Short() {
+		t.Skip("skipping test short mode")
+	}
 
 	initTest()
 	catList, err := manager.getActiveCategories()
@@ -53,7 +55,9 @@ func TestGetAllActive(t *testing.T) {
 
 func TestGetCategoryById(t *testing.T) {
 	fmt.Println("TestGetCategoryById")
-
+	if testing.Short() {
+		t.Skip("skipping test short mode")
+	}
 	initTest()
 	cat, err := manager.getCategoryByID(1)
 	if err != nil {
@@ -74,7 +78,9 @@ func TestGetCategoryById(t *testing.T) {
 
 func TestGetCategoryHistoryByID(t *testing.T) {
 	fmt.Println("TestGetCategoryHistoryByID")
-
+	if testing.Short() {
+		t.Skip("skipping test short mode")
+	}
 	initTest()
 	catList, err := manager.getCategoryHistoryByID(6)
 

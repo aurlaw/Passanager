@@ -1,65 +1,47 @@
 package manager
 
 import (
-	// "database/sql"
 	"encoding/json"
 	// "fmt"
 	"github.com/aurlaw/passanager/models"
 	"github.com/jmoiron/sqlx"
-	// "github.com/jmoiron/sqlx/types"
 	_ "github.com/lib/pq"
 	"time"
 )
 
 type CategoryManager struct {
-	config *Configuration
+	DB *sqlx.DB
 }
 
 // returns all active categories
 func (c *CategoryManager) getActiveCategories() ([]models.Category, error) {
-	// typeList := make([]models.Category, 0)
-
-	db, err := sqlx.Connect("postgres", c.config.DBConnStr)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
 	query := `SELECT categoryid, name, isdeleted, parentcategoryid, createdby, createddate, modifiedby, modifieddate 
 		FROM category WHERE isdeleted = false`
 
 	catList := []models.Category{}
-	err = db.Select(&catList, query)
+	err := c.DB.Select(&catList, query)
 
 	return catList, err
 }
 
+// get category by id
 func (c *CategoryManager) getCategoryByID(categoryId int) (*models.Category, error) {
-	db, err := sqlx.Connect("postgres", c.config.DBConnStr)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
 	query := `SELECT categoryid, name, isdeleted, parentcategoryid, createdby, createddate, modifiedby, modifieddate 
 		FROM category WHERE  categoryid = $1`
 
 	cat := &models.Category{}
-	err = db.Get(cat, query, categoryId)
+	err := c.DB.Get(cat, query, categoryId)
 
 	return cat, err
 }
 
 // get category history for category
 func (c *CategoryManager) getCategoryHistoryByID(categoryId int) ([]models.CategoryHistory, error) {
-	db, err := sqlx.Connect("postgres", c.config.DBConnStr)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
 	query := `SELECT logid, categoryid, previousstate, operation, createdby, createddate,
        modifiedby, modifieddate 
        FROM category_audit_log WHERE  categoryid = $1 ORDER BY modifieddate DESC`
 	catList := make([]models.CategoryHistory, 0)
-	rows, err := db.Queryx(query, categoryId)
+	rows, err := c.DB.Queryx(query, categoryId)
 	defer rows.Close()
 
 	for rows.Next() {
@@ -136,17 +118,6 @@ func (c *CategoryManager) getCategoryHistoryByID(categoryId int) ([]models.Categ
 	return catList, err
 }
 
-/*
-type CategoryHistory struct {
-	BaseModel
-	LogId      int64
-	CategoryId int // `db:"categoryid"`
-	Operation  string
-	Category   *Category
-	// CreatedBy    int       //`db:"createdby"`
-	// CreatedDate  time.Time //`db:"createddate"`
-	// ModifiedBy   int       //`db:"modifiedby"`
-	// ModifiedDate time.Time //`db:"modifieddate"`
-}
-
-*/
+// create
+// update
+// delete
