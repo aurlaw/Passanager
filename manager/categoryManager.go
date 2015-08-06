@@ -121,3 +121,24 @@ func (c *CategoryManager) getCategoryHistoryByID(categoryId int) ([]models.Categ
 // create
 // update
 // delete
+/*
+TODO:
+Get all active
+Get all active tree.
+	Uses adjacent query.
+	May require adding level property on category model
+	Front end will handle rendering tree and selecting appropriate cat.
+Get category by id
+	This will load user for created by and modified by
+	Create user property on category model for both created and modified
+	Pass Boolean flag to load category object for parent cat
+	Create parent category object on category model
+	This will be used for history
+Get category history by id
+	Loads parent category object And users
+Create category
+Update category
+Delete category
+	Need to adjust trigger function to nullify item category
+	Need to adjust trigger to set children categories to deleted items parent category
+*/

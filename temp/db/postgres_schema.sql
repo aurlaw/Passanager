@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.4.4
 -- Dumped by pg_dump version 9.4.0
--- Started on 2015-08-01 19:21:36 EDT
+-- Started on 2015-08-05 22:00:44 EDT
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -133,9 +133,9 @@ CREATE TABLE category (
     isdeleted boolean DEFAULT false NOT NULL,
     parentcategoryid integer,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
-    modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+    modifieddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
 
@@ -152,7 +152,7 @@ CREATE TABLE category_audit_log (
     previousstate json NOT NULL,
     operation character varying(20) NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -219,7 +219,7 @@ CREATE TABLE category_role_acl (
     roleid integer NOT NULL,
     categoryid integer NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -262,7 +262,7 @@ CREATE TABLE category_user_acl (
     categoryid integer NOT NULL,
     userid integer NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -309,7 +309,7 @@ CREATE TABLE item (
     categoryid integer,
     isdeleted boolean DEFAULT false NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -328,7 +328,7 @@ CREATE TABLE item_audit_log (
     previousstate json NOT NULL,
     operation character varying(20) NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -395,7 +395,7 @@ CREATE TABLE item_role_acl (
     itemid integer NOT NULL,
     roleid integer NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -438,7 +438,7 @@ CREATE TABLE item_user_acl (
     itemid integer NOT NULL,
     userid integer NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -479,7 +479,7 @@ CREATE TABLE related_items (
     primaryitemid integer NOT NULL,
     relateditemid integer NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -497,7 +497,7 @@ CREATE TABLE roles (
     name character varying(100) NOT NULL,
     isdeleted boolean DEFAULT false NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -538,7 +538,7 @@ CREATE TABLE user_roles (
     userid integer NOT NULL,
     roleid integer NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -586,7 +586,7 @@ CREATE TABLE users (
     islocked boolean DEFAULT false NOT NULL,
     isadmin boolean DEFAULT false NOT NULL,
     createdby integer NOT NULL,
-    createddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    createddate timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     modifiedby integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -619,7 +619,7 @@ ALTER SEQUENCE users_userid_seq OWNED BY users.userid;
 
 
 --
--- TOC entry 1959 (class 2604 OID 16623)
+-- TOC entry 1960 (class 2604 OID 16623)
 -- Name: categoryid; Type: DEFAULT; Schema: public; Owner: passanager
 --
 
@@ -635,7 +635,7 @@ ALTER TABLE ONLY category_audit_log ALTER COLUMN logid SET DEFAULT nextval('cate
 
 
 --
--- TOC entry 1963 (class 2604 OID 16632)
+-- TOC entry 1964 (class 2604 OID 16632)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: passanager
 --
 
@@ -643,7 +643,7 @@ ALTER TABLE ONLY category_role_acl ALTER COLUMN id SET DEFAULT nextval('category
 
 
 --
--- TOC entry 1966 (class 2604 OID 16640)
+-- TOC entry 1967 (class 2604 OID 16640)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: passanager
 --
 
@@ -651,7 +651,7 @@ ALTER TABLE ONLY category_user_acl ALTER COLUMN id SET DEFAULT nextval('category
 
 
 --
--- TOC entry 1969 (class 2604 OID 16648)
+-- TOC entry 1970 (class 2604 OID 16648)
 -- Name: itemid; Type: DEFAULT; Schema: public; Owner: passanager
 --
 
@@ -667,7 +667,7 @@ ALTER TABLE ONLY item_audit_log ALTER COLUMN logid SET DEFAULT nextval('item_aud
 
 
 --
--- TOC entry 1973 (class 2604 OID 16660)
+-- TOC entry 1974 (class 2604 OID 16660)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: passanager
 --
 
@@ -675,7 +675,7 @@ ALTER TABLE ONLY item_role_acl ALTER COLUMN id SET DEFAULT nextval('item_role_ac
 
 
 --
--- TOC entry 1976 (class 2604 OID 16668)
+-- TOC entry 1977 (class 2604 OID 16668)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: passanager
 --
 
@@ -683,7 +683,7 @@ ALTER TABLE ONLY item_user_acl ALTER COLUMN id SET DEFAULT nextval('item_user_ac
 
 
 --
--- TOC entry 1981 (class 2604 OID 16681)
+-- TOC entry 1982 (class 2604 OID 16681)
 -- Name: roleid; Type: DEFAULT; Schema: public; Owner: passanager
 --
 
@@ -1266,7 +1266,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2015-08-01 19:21:37 EDT
+-- Completed on 2015-08-05 22:00:45 EDT
 
 --
 -- PostgreSQL database dump complete
